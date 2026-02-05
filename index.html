@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Zeltax X | Games</title>
+    <style>
+        body { background: #0a0a0a; color: white; font-family: 'Inter', sans-serif; }
+        .game-card { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+        }
+        .game-card:hover { 
+            transform: translateY(-10px); 
+            border-color: #3b82f6;
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+        }
+        .search-bar { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <header class="p-6 flex justify-between items-center border-b border-white/10 sticky top-0 bg-black/50 backdrop-blur-xl z-50">
+        <div class="text-xl font-black tracking-tighter italic">ZELTAX <span class="text-blue-500">PROJECT</span></div>
+        <div class="flex items-center gap-4">
+            <input type="text" placeholder="Search games..." class="search-bar px-4 py-2 rounded-lg text-sm outline-none focus:border-blue-500 transition hidden md:block">
+            <button class="bg-blue-600 px-5 py-2 rounded-full font-bold text-sm hover:bg-blue-500">Discord</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-8">
+        <div class="mb-12">
+            <h1 class="text-4xl font-bold mb-2">Explore Games</h1>
+            <p class="text-gray-400">აირჩიე თამაში და მიიღე საუკეთესო სკრიპტები.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            
+            <div class="game-card border border-white/10 rounded-2xl overflow-hidden cursor-pointer group" onclick="openScript('Blox Fruits')">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://tr.rbxcdn.com/180day-00994f387693f438a192f15a99569f1a/420/420/Image/Png" alt="Blox Fruits" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Blox Fruits</h3>
+                    <p class="text-xs text-blue-500 font-semibold mt-1">UPDATE 20 • WORKING</p>
+                </div>
+            </div>
+
+            <div class="game-card border border-white/10 rounded-2xl overflow-hidden cursor-pointer group" onclick="openScript('Pet Sim 99')">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://tr.rbxcdn.com/180day-6479f649f993d39578676d494943f9c6/420/420/Image/Png" alt="PS99" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Pet Simulator 99</h3>
+                    <p class="text-xs text-green-500 font-semibold mt-1">AUTO-FARM • NEW</p>
+                </div>
+            </div>
+
+            <div class="game-card border border-white/10 rounded-2xl overflow-hidden cursor-pointer group" onclick="openScript('Brookhaven')">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://tr.rbxcdn.com/180day-7236e7602058e578f2e29367d3410f92/420/420/Image/Png" alt="Brookhaven" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">Brookhaven RP</h3>
+                    <p class="text-xs text-yellow-500 font-semibold mt-1">ADMIN UI • WORKING</p>
+                </div>
+            </div>
+
+            <div class="game-card border border-white/10 rounded-2xl overflow-hidden cursor-pointer group" onclick="openScript('BedWars')">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://tr.rbxcdn.com/180day-3058864705051996963f458153493e87/420/420/Image/Png" alt="BedWars" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-lg">BedWars</h3>
+                    <p class="text-xs text-red-500 font-semibold mt-1">KILL AURA • UPDATED</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-4 z-[100]">
+        <div class="bg-zinc-900 border border-white/10 p-8 rounded-3xl max-w-md w-full">
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+            <p class="text-gray-400 mb-6 text-sm">დააჭირეთ ღილაკს სკრიპტის დასაკოპირებლად:</p>
+            <textarea readonly class="w-full bg-black p-4 rounded-xl text-xs font-mono text-blue-400 border border-white/5 mb-6 h-32">loadstring(game:HttpGet("https://raw.githubusercontent.com/Zeltax/Main/main/loader.lua"))()</textarea>
+            <div class="flex gap-2">
+                <button onclick="closeModal()" class="flex-1 bg-white/10 py-3 rounded-xl font-bold hover:bg-white/20">Close</button>
+                <button onclick="alert('Copied!')" class="flex-1 bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-700">Copy Script</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openScript(gameName) {
+            document.getElementById('modalTitle').innerText = gameName + " Script";
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
